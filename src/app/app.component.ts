@@ -10,6 +10,7 @@ import { SessionService } from './services/session.service';
 })
 export class AppComponent {
   title = 'app';
+  isLoggedIn: boolean = false;
 
   constructor(
     private sessionThang: SessionService,
@@ -20,6 +21,7 @@ export class AppComponent {
     this.sessionThang.checkLogin()
     .then((userInfo) => {
       this.routerThang.navigate(['/lists']);
+      this.isLoggedIn = true;
     })//Else redirect to /
     .catch(err => {
       this.routerThang.navigate(['/']);

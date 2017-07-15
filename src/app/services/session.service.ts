@@ -40,4 +40,15 @@ export class SessionService {
     .toPromise()
     .then(res => res.json());
   }
+
+  logout() {
+    return this.myHttpThang
+    .post(
+      this.baseUrl + '/api/logout',
+      {},
+      { withCredentials: true }
+    )
+    .toPromise()
+    .then(res => res.json());
+  }
 }
