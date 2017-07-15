@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs/Subject';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
@@ -6,6 +7,9 @@ import 'rxjs/add/operator/toPromise';
 export class SessionService {
   baseUrl: string ="http://localhost:3000";
 
+  private loggedInSource = new Subject<any>();
+  loggedIn$ = this.loggedInSource.asObservable();
+  // app component will subscribe to "loggedIn$"
   constructor(
     private myHttpThang: Http
   ) { }

@@ -37,7 +37,11 @@ export class AppComponent {
       this.isLoggedIn = false;
     })
     .catch(() => {
-      
+
     });
+  }
+
+  handleLogin(userFromApi) {
+    
   }
 }
