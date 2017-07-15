@@ -28,4 +28,16 @@ export class AppComponent {
     });
 
   }
+
+  logMeOut() {
+    this.sessionThang.logout()
+    .then(() => {
+      this.isLoggedIn = false;
+      this.routerThang.navigate(['/']);
+      this.isLoggedIn = false;
+    })
+    .catch(() => {
+      
+    });
+  }
 }
