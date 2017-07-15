@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { SessionService } from '../services/session.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-log-in',
@@ -10,9 +11,11 @@ import { SessionService } from '../services/session.service';
 export class LogInComponent implements OnInit {
   formEmail: string;
   formPassword: string;
+  errorMessage:string;
 
   constructor(
-    private sessionThang: SessionService
+    private sessionThang: SessionService,
+    private routerThang: Router
   ) { }
 
   ngOnInit() {
@@ -21,11 +24,11 @@ export class LogInComponent implements OnInit {
   submitLogin() {
     this.sessionThang.login(this.formEmail, this.formPassword )
       .then(() => {
-        alert('ZOMG login success');
+        this.routerThang.navigate(['/lists']);
       })
-      .catch((theError) => {
-        console.log(theError);
-        alert('ERROR');
+      .catch((errResponse) => {
+        const apiInfo = errResponse.json();
+        this.errorMessage = apiInfo.message;
       });
   }
 
