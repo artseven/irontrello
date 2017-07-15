@@ -18,6 +18,11 @@ export class AppComponent {
   ) {}
 
   ngOnInit() {
+    this.sessionThang.loggedIn$.subscribe((userFromApi) => {
+      this.isLoggedIn = true;
+    })
+
+    
     this.sessionThang.checkLogin()
     .then((userInfo) => {
       this.routerThang.navigate(['/lists']);
@@ -42,6 +47,6 @@ export class AppComponent {
   }
 
   handleLogin(userFromApi) {
-    
+
   }
 }

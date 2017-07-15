@@ -8,11 +8,16 @@ export class SessionService {
   baseUrl: string ="http://localhost:3000";
 
   private loggedInSource = new Subject<any>();
+  
   loggedIn$ = this.loggedInSource.asObservable();
   // app component will subscribe to "loggedIn$"
   constructor(
     private myHttpThang: Http
   ) { }
+
+  loggedIn (userInfo) {
+    this.loggedInSource.next(userInfo);
+  }
 
   checkLogin() {
     return this.myHttpThang.get(this.baseUrl + '/api/checklogin',
