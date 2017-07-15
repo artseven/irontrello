@@ -16,8 +16,14 @@ export class SessionService {
     .then(res => res.json());
   }
 
-  login() {
-    return this.myHttpThang.post(this.baseUrl + '/api/login')
+  login(email, password) {
+    return this.myHttpThang.post(
+      this.baseUrl + '/api/login',
+      {
+        loginEmail: email,
+        loginPassword: password
+      }
+    )
     .toPromise()
     .then(res => res.json());
   }
