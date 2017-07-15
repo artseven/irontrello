@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Output,
+  EventEmitter } from '@angular/core';
 
 import { SessionService } from '../services/session.service';
 import { Router } from '@angular/router';
@@ -11,7 +15,10 @@ import { Router } from '@angular/router';
 export class LogInComponent implements OnInit {
   formEmail: string;
   formPassword: string;
+
   errorMessage:string;
+
+  @Output() onLoginSubmit = new EventEmitter<any>();
 
   constructor(
     private sessionThang: SessionService,
@@ -23,8 +30,9 @@ export class LogInComponent implements OnInit {
 
   submitLogin() {
     this.sessionThang.login(this.formEmail, this.formPassword )
-      .then(() => {
+      .then((userFromApi) => {
         this.routerThang.navigate(['/lists']);
+        this.onLoginSubmit.emit(userFromApi);
       })
       .catch((errResponse) => {
         const apiInfo = errResponse.json();

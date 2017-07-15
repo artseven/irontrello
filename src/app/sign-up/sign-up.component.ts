@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Output,
+  EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { SessionService } from '../services/session.service';
 
@@ -11,6 +15,9 @@ import { SessionService } from '../services/session.service';
 export class SignUpComponent implements OnInit {
   newUser: any={};
   errorMessage: string;
+
+  @Output() onSignUpSubmit = new EventEmitter<any>();
+
   constructor(
     private sessionThang: SessionService,
     private routerThang: Router
@@ -21,8 +28,9 @@ export class SignUpComponent implements OnInit {
 
   submitSignup() {
     this.sessionThang.signup(this.newUser)
-    .then(() => {
+    .then((userFromApi) => {
       this.routerThang.navigate(['/lists']);
+      this.onSignUpSubmit.emit(userFromApi);
 
     })
     .catch((errResponse) => {
