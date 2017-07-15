@@ -10,6 +10,7 @@ import { ListService } from '../services/list.service';
 export class ListsPageComponent implements OnInit {
   myLists: any[] = [];
 
+  newListTitle: string;
   constructor(
     private listThang: ListService
   ) { }
@@ -22,6 +23,13 @@ export class ListsPageComponent implements OnInit {
     .catch((errResponse) => {
       alert('List error');
     });
+  }
+
+  makeAList() {
+    this.listThang.createList(this.newListTitle)
+    .then((newListFromApi) => {
+      this.myLists.push(newListFromApi)
+    })
   }
 
 }
