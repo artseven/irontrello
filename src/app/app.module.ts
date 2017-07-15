@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Http } from '@angular/http'
+import { HttpModule } from '@angular/http'
 import 'rxjs/Rx';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -27,7 +27,8 @@ import { SessionService } from './services/session.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpModule
   ],
   providers: [CardService, ListService, SessionService],
   bootstrap: [AppComponent]
