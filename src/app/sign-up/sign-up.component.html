@@ -1,3 +1,21 @@
-<p>
-  sign-up works!
-</p>
+<h3>Sign Up</h3>
+
+<p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+<form (ngSubmit)="submitSignup()">
+  <label for="full-name-input"> Full Name</label>
+  <input type="text" id="full-name-input" placeholder="Mr Pizza"
+    [(ngModel)]="newUser.signupFullName" name="signupFullName">
+  <br>
+
+  <label for="email-input"> E-mail</label>
+  <input type="email" id="email-input" placeholder="123@example.com"
+    [(ngModel)]="newUser.signupEmail" name="signupEmail">
+  <br>
+
+  <label for="password-input"> Password</label>
+  <input type="password" id="password-input" placeholder="*****"
+    [(ngModel)]="newUser.signupPassword" name="signupPassword">
+  <br>
+
+  <button> Log In </button>
+</form>
