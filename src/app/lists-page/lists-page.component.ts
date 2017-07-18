@@ -10,6 +10,8 @@ import { ListService } from '../services/list.service';
 export class ListsPageComponent implements OnInit {
   myLists: any[] = [];
 
+  newCardTitles: string[]=[];
+
   newListTitle: string;
   constructor(
     private listThang: ListService

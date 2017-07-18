@@ -1,11 +1,18 @@
 <h2> My Lists</h2>
 <div class="list-of-lists">
   <ul class="lsit-of-lists">
-    <li class="list-container" *ngFor="let oneList of myLists">
+    <li class="list-container" *ngFor="let oneList of myLists; let i = index">
       <h3> {{ oneList.title }}</h3>
       <ul>
         <li class="card" *ngFor="let oneCard of oneList.cards">
           <p> {{ oneCard.title }}</p>
+        </li>
+        <li>
+          <form (ngSubmit)="makeACard(oneList._id)">
+            <input type="text" placeholder="Add a card..." [(ngModel)]="newCardTitles[i]" name="newListTitle[]">
+            <br>
+            <button> Save </button>
+          </form>
         </li>
       </ul>
     </li>
