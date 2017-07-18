@@ -22,8 +22,9 @@ export class AppComponent {
       this.isLoggedIn = true;
     })
 
-    
+
     this.sessionThang.checkLogin()
+    //if logged in, redirect to /lists
     .then((userInfo) => {
       this.routerThang.navigate(['/lists']);
       this.isLoggedIn = true;
@@ -47,6 +48,6 @@ export class AppComponent {
   }
 
   handleLogin(userFromApi) {
-
+    this.isLoggedIn = true;
   }
 }
