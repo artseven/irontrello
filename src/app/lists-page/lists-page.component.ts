@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ListService } from '../services/list.service';
+import { CardService } from '../services/card.service';
 
 @Component({
   selector: 'app-lists-page',
@@ -14,7 +15,8 @@ export class ListsPageComponent implements OnInit {
 
   newListTitle: string;
   constructor(
-    private listThang: ListService
+    private listThang: ListService,
+    private cardThang: CardService
   ) { }
 
   ngOnInit() {
@@ -28,10 +30,27 @@ export class ListsPageComponent implements OnInit {
   }
 
   makeAList() {
-    this.listThang.createList(this.newListTitle)
-    .then((newListFromApi) => {
-      this.myLists.push(newListFromApi)
-    })
+      this.listThang.createList(this.newListTitle)
+        .then((newListFromApi) => {
+            this.myLists.push(newListFromApi);
+            this.newListTitle = '';
+        })
+        .catch((errResponse) => {
+            alert('List create error 🐋');
+        });
+  }
+
+  makeACard(theList, titleIndex) {
+      const theTitle = this.newCardTitles[titleIndex];
+
+      this.cardThang.createCard(theList._id, theTitle)
+        .then((newCardFromApi) => {
+            theList.cards.push(newCardFromApi);
+            this.newCardTitles[titleIndex] = '';
+        })
+        .catch((errResponse) => {
+            alert('Card create error 🐋');
+        });
   }
 
 }
